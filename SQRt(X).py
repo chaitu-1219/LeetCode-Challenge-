@@ -1,3 +1,38 @@
+'''
+Solution: Understanding the Core of the Problem
+The original problem can be stated as:
+
+“Compute the square root of a non-negative integer x, and return only the integer part (rounded down).”
+
+Examples:
+
+x = 8 → √8 ≈ 2.828 → Result = 2
+x = 9 → √9 = 3 → Result = 3
+We can reframe this problem as:
+
+“Find the largest integer m such that m^2 <= x.”
+This new formulation is crucial—it sets the stage for a binary search solution.
+
+Why Not Just Use a Linear Search?
+The Search Space is Finite
+We know the square root of x must lie between 0 and x.
+In fact, for x >= 2, we can safely limit our search to the range 1 to x // 2, because (x // 2)^2 will already exceed x.
+
+So we have a finite, well-bounded range to search.
+
+The Key Insight: Monotonicity
+Here’s the most important observation:
+
+As m increases, m^2 also increases(monotonicity).
+If m^2 < x, we need to try a larger m.
+If m^2 > x, we try a smaller m.
+
+This behavior is monotonic, meaning we can eliminate half of the search space at each step—perfect for binary search.
+
+Complexity
+Time complexity: O(logx)
+Space complexity: O(1)
+'''
 class Solution(object):
     def mySqrt(self, x):
         """Compute the integer square root of x (floor of sqrt(x))."""
